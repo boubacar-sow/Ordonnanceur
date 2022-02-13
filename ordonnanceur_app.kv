@@ -1,0 +1,86 @@
+#:import utils kivy.utils
+#:import navigation_screen_manager navigation_screen_manager
+#:import boxlayout_with_action_bar boxlayout_with_action_bar
+#:import page_ajout_processus page_ajout_processus
+
+MainWidget:
+
+
+<MyButton@Button>
+    size_hint: None, None
+    size: 100, 100
+
+<MainWidget>:
+    RelativeLayout:
+
+        size_hint: 1, 1
+        RelativeLayout:
+
+            RelativeLayout:
+                canvas.before:
+                    Color:
+                        rgb: 224/255, 224/255, 224/255
+                    Rectangle:
+                        size: (self.size[0], self.size[1]/5)
+                        pos: 0, self.size[1]/2 + self.size[1]/3
+                    Color:
+                        rgb: 192/255, 192/255, 192/255
+                    Rectangle:
+                        size: (self.size[0]/3, self.size[1]/7.8)
+                        pos: 10, self.size[1]/2 + self.size[1]/2.8
+                MyButton:
+                    pos_hint: {'center_x': 0.15, 'top': 0.97}
+                    size: dp(150), dp(20)
+                    text: "Ajouter un Processus"
+                    on_press: app.manager.push("AjoutProcessus")
+                MyButton:
+                    size: dp(150), dp(20)
+                    pos_hint: {'center_x': 0.15, 'top': 0.9}
+                    text: "Enlever un processus"
+                    background_color: 211/255, 211/255, 211/255, 1
+            RelativeLayout:
+                canvas.before:
+                    Color:
+                        rgb: 192/255, 192/255, 192/255
+                    Rectangle:
+                        size: (self.size[0]/3.5, self.size[1]/7.8)
+                        pos: self.size[0]/2 + self.size[0]/6, self.size[1]/2 + self.size[1]/2.8
+                MyButton:
+                    pos_hint: {'right': 0.9, 'top': 0.95}
+                    size: dp(150), dp(20)
+                    text: "Simuler"
+                    background_color: 211/255, 211/255, 211/255, 1
+
+        RelativeLayout:
+            canvas.before:
+                Color:
+                    rgb: 104/255, 88/255, 88/255
+                Rectangle:
+                    size: root.size[0], self.size[1]
+                    pos: 0, 0
+            size_hint: None, .7
+            GridLayout:
+                cols: 1
+                canvas:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        rectangle: (0, 0, root.width, self.height)
+                        width: 1
+                Label:
+                    size_hint: None, None
+                    text: 'Nom: \n Pid: 0\n Priorité: 4\n Etat: terminé'
+                    valign: 'top'
+
+
+
+<MyScreenManager>:
+    Screen:
+        name: "EcranPrincipal"
+        MainWidget:
+    Screen:
+        name: "AjoutProcessus"
+        BoxLayoutWithActionBar:
+            title: "Processus"
+            PageAjoutProcessus:
+
